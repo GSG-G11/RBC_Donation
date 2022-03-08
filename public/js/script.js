@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 const tableBody = document.querySelector('tbody');
 const donorsSection = document.querySelector('.donors');
+const form = document.getElementById('form');
 const getBanks = async () => {
   const banksData = await fetch('/banks');
   const banks = await banksData.json();
-  banks.forEach((bank) => {
-    const { id } = bank;
+  banks.forEach(bank => {
+    const {id} = bank;
     const tableRow = document.createElement('tr');
     tableBody.appendChild(tableRow);
 
@@ -18,8 +19,8 @@ const getBanks = async () => {
     tableRow.appendChild(bankAddress);
 
     fetch(`/banks/${id}/donors`)
-      .then((response) => response.json())
-      .then((donors) => {
+      .then(response => response.json())
+      .then(donors => {
         const bankDonorsNumber = document.createElement('td');
         bankDonorsNumber.textContent = Object.values(donors)[0].count;
         tableRow.appendChild(bankDonorsNumber);
@@ -67,6 +68,35 @@ const getDonors = async () => {
     deleteForm.appendChild(deleteBtn);
   });
 };
+
+function validateForm(e) {
+  e.preventDefault();
+  const email = document.getElementsByName('email')[0].value.trim();
+  const bloodType = document.getElementsByName('bloodType')[0].value.trim();
+  const bank = document.getElementsByName('bankId')[0].value.trim();
+  const age = document.getElementsByName('age')[0].value.trim();
+  const firstName = document.getElementsByName('firstName')[0].value.trim();
+  const lastName = document.getElementsByName('lastName')[0].value.trim();
+  const address = document.getElementsByName('address')[0].value.trim();
+
+  if (!email || !bloodType || !bank || !age || !firstName || !lastName || !address) {
+    alert('Please fill all fields');
+    return;
+  } else if (!email.includes('@')) {
+    alert('Please enter a valid email');
+    return;
+  } else if (age < 18) {
+    alert('You must be 18 or older to donate blood');
+    return;
+  } else if (!bloodType || !bank) {
+    alert('Please select the blood type and bank');
+    return;
+  } else {
+    form.submit();
+  }
+}
+
+form.addEventListener('submit', validateForm);
 
 getBanks();
 getDonors();
