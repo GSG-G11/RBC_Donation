@@ -1,17 +1,19 @@
+const { join } = require('path');
 const express = require('express');
+const compression = require('compression');
+const { bankRouter } = require('./routes');
+// const router = require('./routes/index');
+
 const app = express();
-const {pool} = require('../src/db/db');
-const {bankRouter} = require('./routes');
+app.use(compression());
+app.use(express.static(join(__dirname, '..', 'public')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// app.use(router);
+
+app.set('port', process.env.PORT || 3000);
 
 app.use(bankRouter);
-
-app.use(express.static('public'));
-
-pool.connect(err => {
-  if (err) {
-    return console.error('Error connecting to DB', err);
-  }
-  console.log('connected to DB');
-});
 
 module.exports = app;

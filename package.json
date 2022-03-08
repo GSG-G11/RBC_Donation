@@ -4,20 +4,31 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "build": "node src/db/build/build.js"
+    "start": "NODE_ENV=production node src/server.js",
+    "dev": "NODE_ENV=development nodemon src/server.js",
+    "test": "NODE_ENV=test jest",
+    "build": "NODE_ENV=production node src/db/build/build.js",
+    "build:dev": "NODE_ENV=development node src/db/build/build.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "env2": "^2.2.2",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "express": "^4.17.3",
-    "pg": "^8.7.3"
+    "jest": "^27.5.1",
+    "pg": "^8.7.3",
+    "prettier": "^2.5.1"
   },
   "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"

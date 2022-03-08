@@ -1,3 +1,3 @@
-const {bankRouter} = require('./bankRoutes');
+const { bankRouter } = require('./bankRoutes');
 
-module.exports = {bankRouter};
+module.exports = { bankRouter };

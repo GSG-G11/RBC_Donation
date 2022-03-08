@@ -1,3 +1,3 @@
-const getAllBanks = `SELECT * FROM banks`;
+const getAllBanks = 'SELECT * FROM banks';
 
-module.exports = {getAllBanks};
+module.exports = { getAllBanks };
