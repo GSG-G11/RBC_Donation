@@ -3,7 +3,7 @@ require('env2')('./.env');
 const {
   NODE_ENV, DB_URL, DEV_DB_URL, TEST_DB_URL,
 } = process.env;
-let URL = '';
+let URL;
 
 switch (NODE_ENV) {
   case 'production':

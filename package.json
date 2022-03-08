@@ -7,7 +7,8 @@
     "start": "NODE_ENV=production node src/server.js",
     "dev": "NODE_ENV=development nodemon src/server.js",
     "test": "NODE_ENV=test jest",
-    "build": "node src/db/build/build.js"
+    "build": "NODE_ENV=production node src/db/build/build.js",
+    "build:dev": "NODE_ENV=development node src/db/build/build.js"
   },
   "keywords": [],
   "author": "",

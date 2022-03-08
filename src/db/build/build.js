@@ -1,13 +1,13 @@
 // Requiring the modules
 
 const fs = require('fs');
-const { pool } = require('../db');
+const connection = require('../config/db');
 
 // Read the Build.sql file
 const sqlBuildQuery = fs.readFileSync('src/db/build/build.sql', 'utf8');
 
 // Execute the Build.sql file
-pool.query(sqlBuildQuery, (err, res) => {
+connection.query(sqlBuildQuery, (err, res) => {
   if (err) {
     return console.error('Error making query', err);
   }
@@ -19,4 +19,4 @@ pool.query(sqlBuildQuery, (err, res) => {
 });
 
 // end connection to database
-pool.end();
+connection.end();
