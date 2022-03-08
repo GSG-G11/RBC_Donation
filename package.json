@@ -4,11 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node src/server.js",
-    "dev": "NODE_ENV=development nodemon src/server.js",
-    "test": "NODE_ENV=test jest",
-    "build": "NODE_ENV=production node src/db/build/build.js",
-    "build:dev": "NODE_ENV=development node src/db/build/build.js"
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "test": "cross-env NODE_ENV=test jest",
+    "build": "cross-env NODE_ENV=production node src/db/build/build.js",
+    "build:dev": "cross-env NODE_ENV=development node src/db/build/build.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "prettier": "^2.5.1"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
