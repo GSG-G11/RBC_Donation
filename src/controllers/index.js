@@ -1,4 +1,9 @@
 const { getBanks, getBankDonors } = require('./bankController');
-const { getDonors } = require('./donorController');
+const { getDonors, addDonor } = require('./donorController');
 
-module.exports = { getBanks, getBankDonors, getDonors };
+module.exports = {
+  getBanks,
+  getBankDonors,
+  getDonors,
+  addDonor,
+};

@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 const tableBody = document.querySelector('tbody');
 const donorsSection = document.querySelector('.donors');
 const getBanks = async () => {
   const banksData = await fetch('/banks');
   const banks = await banksData.json();
-  banks.forEach(bank => {
-    const id = bank.id;
+  banks.forEach((bank) => {
+    const { id } = bank;
     const tableRow = document.createElement('tr');
     tableBody.appendChild(tableRow);
 
@@ -17,8 +18,8 @@ const getBanks = async () => {
     tableRow.appendChild(bankAddress);
 
     fetch(`/banks/${id}/donors`)
-      .then(response => response.json())
-      .then(donors => {
+      .then((response) => response.json())
+      .then((donors) => {
         const bankDonorsNumber = document.createElement('td');
         bankDonorsNumber.textContent = Object.values(donors)[0].count;
         tableRow.appendChild(bankDonorsNumber);

@@ -1,14 +1,9 @@
 const express = require('express');
-const middlewares = require('./middlewares');
-const { donorRouter } = require('./routes');
-// const router = require('./routes/index');
+const middleware = require('./middleware');
 
 const app = express();
 
-// app.use(router);
-
-middlewares(app);
-app.use(donorRouter);
+middleware(app);
 
 app.set('port', process.env.PORT || 3000);
 
