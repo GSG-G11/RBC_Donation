@@ -3,10 +3,10 @@ const { getAllDonors, insertDonor, removeDonor } = require('../db/queries');
 
 const getDonors = async (req, res) => {
   try {
-    const donors = await connection.query(getAllDonors);
-    res.send(donors.rows);
+    const { rows } = await connection.query(getAllDonors);
+    res.send(rows);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json(err);
   }
 };
 
