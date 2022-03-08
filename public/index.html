@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+    <link rel="manifest" href="img/site.webmanifest" />
+    <title>RBC | Donate Now!</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="title">RBC</h1>
+      <h2 class="slang">Your donation matters!</h2>
+    </header>
+    <main>
+      <div class="container">
+        <section class="hero-section">
+          <div class="heart-image">
+            <img src="./img/heart.svg" alt="" />
+          </div>
+          <div class="donor-container">
+            <form action="/donor" class="donor-form" method="post">
+              <div class="row">
+                <input
+                  type="text"
+                  name="first_name"
+                  class="form-control"
+                  placeholder="First Name"
+                />
+                <input
+                  type="text"
+                  name="last_name"
+                  class="form-control"
+                  placeholder="Last Name"
+                />
+              </div>
+              <div class="row">
+                <input type="text" name="email" class="form-control" placeholder="Email" />
+                <input type="number" name="age" class="form-control" placeholder="Age" />
+              </div>
+              <div class="row">
+                <textarea name="address" class="form-control" placeholder="Address"></textarea>
+              </div>
+              <div class="row">
+                <input type="email" name="email" class="form-control" placeholder="Email" />
+              </div>
+              <div class="row">
+                <select name="blood_type" id="">
+                  <option value="">Select Blood Type</option>
+                  <option value="+A">+A</option>
+                  <option value="-A">-A</option>
+                  <option value="+B">+B</option>
+                  <option value="+B">+B</option>
+                  <option value="+AB">+AB</option>
+                  <option value="-AB">-AB</option>
+                  <option value="+O">+O</option>
+                  <option value="-O">-O</option>
+                </select>
+              </div>
+              <div class="row">
+                <select name="bank_id" id="">
+                  <option value="">Select Bank</option>
+                  <option value="1">Al Shifaa Hospital</option>
+                  <option value="2">Hilal Ahmar</option>
+                </select>
+              </div>
+
+              <button class="btn">Donate Now!</button>
+            </form>
+          </div>
+        </section>
+        <section class="donors-section">
+          <h1>Latest Donors</h1>
+          <div class="donors">
+            <div class="donor-blood">
+              <div class="donor-blood-type"><span>O-</span></div>
+              <p class="donor-name">Abed</p>
+              <form action="/donors/:id" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button class="delete-btn">Delete</button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <section class="bank-section">
+          <table class="bank-table">
+            <thead>
+              <tr>
+                <th>Bank Name</th>
+                <th>Address</th>
+                <th>No. of Donors</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bank-name">Al Shifaa Hospital</td>
+                <td>
+                  <p>
+                    <span>
+                      <p class="bank-address">Al Shifaa Hospital, Al Shifaa, Cairo, Egypt</p>
+                    </span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    <span class="donors-number">10</span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>Hilal Ahmar</td>
+                <td>
+                  <p>Hilal Ahmar, Al Shifaa, Cairo, Egypt</p>
+                </td>
+                <td>
+                  <p>
+                    <span class="donors-number">10</span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
