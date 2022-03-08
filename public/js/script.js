@@ -4,6 +4,7 @@ const getBanks = async () => {
   const banksData = await fetch('/banks');
   const banks = await banksData.json();
   banks.forEach(bank => {
+    const id = bank.id;
     const tableRow = document.createElement('tr');
     tableBody.appendChild(tableRow);
 
@@ -15,9 +16,13 @@ const getBanks = async () => {
     bankAddress.textContent = bank.address;
     tableRow.appendChild(bankAddress);
 
-    const bankDonorsNumber = document.createElement('td');
-    bankDonorsNumber.textContent = bank.donors_number;
-    tableRow.appendChild(bankDonorsNumber);
+    fetch(`/banks/${id}/donors`)
+      .then(response => response.json())
+      .then(donors => {
+        const bankDonorsNumber = document.createElement('td');
+        bankDonorsNumber.textContent = Object.values(donors)[0].count;
+        tableRow.appendChild(bankDonorsNumber);
+      });
   });
 };
 
