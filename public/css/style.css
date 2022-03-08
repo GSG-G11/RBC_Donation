@@ -1,0 +1,234 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+html {
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8.2rem;
+  padding-top: 1.8rem;
+}
+
+header .title {
+  font-size: 4.8rem;
+  color: rgb(236, 72, 72);
+  animation: reveal 1.5s ease-in-out;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+section {
+  margin-top: 3.2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  padding: 0 4.8rem;
+}
+
+.hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4.2rem;
+  padding: 0 4.2rem;
+}
+
+.heart-image {
+  width: 100%;
+  animation: slideFromLeft 1.5s ease-in-out;
+}
+
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.heart-image img {
+  max-width: 100%;
+}
+
+.donor-container {
+  width: 100%;
+}
+
+.donor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: slideFromRight 1.5s ease-in-out;
+}
+
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.row {
+  display: flex;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.row input,
+.row textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  border-bottom: #ccc 1px solid;
+}
+
+.row select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  border-bottom: #ccc 1px solid;
+  color: rgb(236, 72, 72);
+  cursor: pointer;
+}
+
+select option {
+  color: rgb(236, 72, 72);
+  font-size: 1.2rem;
+}
+
+button.btn {
+  align-self: center;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background: rgb(236, 72, 72);
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.donors-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4.2rem;
+}
+
+.donors-section h1 {
+  text-align: center;
+  font-size: 2.4rem;
+}
+
+.donors-section .donors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.donor-blood {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.donor-blood-type {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.donor-blood-type:hover {
+  transform: scale(1.2) translateY(-2px);
+}
+.donor-name {
+  margin-top: 1.2rem;
+  font-size: 1.2rem;
+  color: rgb(179, 0, 0);
+  text-align: center;
+}
+
+.delete-btn {
+  align-self: center;
+  padding: 0.4rem 0.4rem;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background: rgb(236, 72, 72);
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgb(196, 37, 37);
+  color: #fff;
+}
+
+.donor-blood-type span {
+  font-size: 1.2rem;
+  color: rgb(236, 72, 72);
+  text-align: center;
+  margin-top: 0.8rem;
+}
+.donor-blood-type::before {
+  content: '';
+  background-color: #ff4f4f11;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 50%;
+  border-top-right-radius: 0%;
+  transform: rotate(-45deg);
+}
+
+table.bank-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: none;
+}
+.bank-table th {
+  color: rgb(236, 72, 72);
+}
+.bank-table th,
+.bank-table td {
+  border-bottom: #ccc 1px solid;
+  padding: 0.8rem;
+  text-align: center;
+}
+
+.donors-number {
+  font-size: 1.2rem;
+}
+
+body {
+  padding-bottom: 3.2rem;
+}
