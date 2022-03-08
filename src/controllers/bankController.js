@@ -12,10 +12,14 @@ const getBanks = async (req, res) => {
 
 const getBankDonors = async (req, res) => {
   try {
+
     const donors = await connection.query(queries.getBankDonorsNumber, [req.params.id]);
+
     res.send(donors.rows);
   } catch (err) {
     res.status(500).send(err);
   }
 };
-module.exports = {getBanks, getBankDonors};
+
+
+module.exports = { getBanks, getBankDonors };
