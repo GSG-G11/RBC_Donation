@@ -1,0 +1,24 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "build": "node src/db/build/build.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "env2": "^2.2.2",
+    "express": "^4.17.3",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  }
+}
