@@ -31,7 +31,7 @@ const getDonors = async () => {
   const donorsData = fetch('/donors');
   const response = await donorsData;
   const data = await response.json();
-  data.forEach(donor => {
+  data.forEach((donor) => {
     const donorCard = document.createElement('div');
     donorsSection.appendChild(donorCard);
     donorCard.classList.add('donor-blood');
@@ -50,7 +50,7 @@ const getDonors = async () => {
     donorCard.appendChild(donorName);
 
     const deleteForm = document.createElement('form');
-    deleteForm.setAttribute('action', `/donors/${donor.id}`);
+    deleteForm.setAttribute('action', `/donor/${donor.id}`);
     deleteForm.setAttribute('method', 'POST');
 
     donorCard.appendChild(deleteForm);

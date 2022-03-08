@@ -10,10 +10,10 @@ const getBanks = async (req, res) => {
   }
 };
 
-const getBankDonors = async (req, res) => {
+const getBankDonors = async ({ params }, res) => {
   try {
-    const donors = await connection.query(getBankDonorsNumber, [req.params.id]);
-
+    const { id } = params;
+    const donors = await connection.query(getBankDonorsNumber, [id]);
     res.send(donors.rows);
   } catch (err) {
     res.status(500).send(err);
