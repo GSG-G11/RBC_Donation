@@ -1,3 +1,5 @@
 const getAllBanks = 'SELECT * FROM banks';
 
-module.exports = { getAllBanks };
+const getAllDonors = 'SELECT * FROM donors';
+
+module.exports = { getAllBanks, getAllDonors };
