@@ -1,5 +1,5 @@
 const connection = require('../db/config/db');
-const { getAllDonors, insertDonor } = require('../db/queries');
+const { getAllDonors, insertDonor, removeDonor } = require('../db/queries');
 
 const getDonors = async (req, res) => {
   try {
@@ -29,4 +29,14 @@ const addDonor = async ({ body }, res) => {
   }
 };
 
-module.exports = { getDonors, addDonor };
+const deleteDonor = async ({ params }, res) => {
+  try {
+    const { id } = params;
+    await connection.query(removeDonor, [id]);
+    res.redirect('/');
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+module.exports = { getDonors, addDonor, deleteDonor };

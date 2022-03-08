@@ -4,9 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon-16x16.png"
+    />
     <link rel="manifest" href="img/site.webmanifest" />
     <title>RBC | Donate Now!</title>
     <link rel="stylesheet" href="./css/style.css" />
@@ -39,11 +53,25 @@
                 />
               </div>
               <div class="row">
-                <input type="text" name="email" class="form-control" placeholder="Email" />
-                <input type="number" name="age" class="form-control" placeholder="Age" />
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                />
+                <input
+                  type="number"
+                  name="age"
+                  class="form-control"
+                  placeholder="Age"
+                />
               </div>
               <div class="row">
-                <textarea name="address" class="form-control" placeholder="Address"></textarea>
+                <textarea
+                  name="address"
+                  class="form-control"
+                  placeholder="Address"
+                ></textarea>
               </div>
 
               <div class="row">
@@ -60,10 +88,8 @@
                 </select>
               </div>
               <div class="row">
-                <select name="bankId" id="">
-                  <option value="">Select Bank</option>
-                  <option value="1">Al Shifaa Hospital</option>
-                  <option value="2">Hilal Ahmar</option>
+                <select name="bankId" id="banksId">
+                  <option disabled value="">Select Bank</option>
                 </select>
               </div>
 
@@ -73,16 +99,7 @@
         </section>
         <section class="donors-section">
           <h1>Latest Donors</h1>
-          <div class="donors">
-            <!-- <div class="donor-blood">
-              <div class="donor-blood-type"><span>O-</span></div>
-              <p class="donor-name">Abed</p>
-              <form action="/donors/:id" method="post">
-                <input type="hidden" name="_method" value="delete" />
-                <button class="delete-btn">Delete</button>
-              </form>
-            </div> -->
-          </div>
+          <div class="donors"></div>
         </section>
         <section class="bank-section">
           <table class="bank-table">
@@ -93,30 +110,7 @@
                 <th>No. of Donors</th>
               </tr>
             </thead>
-            <tbody>
-              <!-- <tr>
-                <td class="bank-name">Al Shifaa Hospital</td>
-                <td>
-                  <p class="bank-address">Al Shifaa Hospital, Al Shifaa, Cairo, Egypt</p>
-                </td>
-                <td>
-                  <p>
-                    <span class="donors-number">10</span>
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td>Hilal Ahmar</td>
-                <td>
-                  <p>Hilal Ahmar, Al Shifaa, Cairo, Egypt</p>
-                </td>
-                <td>
-                  <p>
-                    <span class="donors-number">10</span>
-                  </p>
-                </td>
-              </tr> -->
-            </tbody>
+            <tbody></tbody>
           </table>
         </section>
       </div>

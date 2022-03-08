@@ -8,6 +8,9 @@
 html {
   overflow-x: hidden;
 }
+body {
+  overflow-x: hidden;
+}
 
 header {
   display: flex;
@@ -168,7 +171,6 @@ button.btn {
   flex-direction: column;
   text-align: center;
   transition: all 0.3s ease-in-out;
-  width: 100%;
 }
 
 .donor-blood-type:hover {
@@ -176,6 +178,11 @@ button.btn {
 }
 .donor-name {
   margin-top: 2.4rem;
+  color: rgb(179, 0, 0);
+  text-align: center;
+}
+.donor-bank-name {
+  margin-top: 0.8rem;
   color: rgb(179, 0, 0);
   text-align: center;
 }
@@ -199,11 +206,6 @@ button:hover {
   color: #fff;
 }
 
-.donor-blood-type span {
-  color: rgb(236, 72, 72);
-  text-align: center;
-  margin-top: 0.8rem;
-}
 .donor-blood-type::before {
   content: '';
   background-color: #ff4f4f11;
@@ -211,11 +213,19 @@ button:hover {
   height: 60px;
   position: absolute;
   top: 0;
-  right: 10%;
-
   border-radius: 50%;
   border-top-right-radius: 0%;
   transform: rotate(-45deg);
+  position: relative;
+}
+
+.donor-blood-type span {
+  color: rgb(236, 72, 72);
+  margin-top: 0.8rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
 }
 
 table.bank-table {

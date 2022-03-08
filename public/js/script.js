@@ -1,12 +1,20 @@
 /* eslint-disable no-undef */
 const tableBody = document.querySelector('tbody');
 const donorsSection = document.querySelector('.donors');
+const bankSelectElement = document.querySelector('#banksId');
 const form = document.getElementById('form');
+
 const getBanks = async () => {
   const banksData = await fetch('/banks');
   const banks = await banksData.json();
-  banks.forEach(bank => {
-    const {id} = bank;
+  banks.forEach((bank) => {
+    const { id, name } = bank;
+
+    const optionBank = document.createElement('option');
+    optionBank.value = id;
+    optionBank.textContent = name;
+    bankSelectElement.appendChild(optionBank);
+
     const tableRow = document.createElement('tr');
     tableBody.appendChild(tableRow);
 
@@ -19,8 +27,8 @@ const getBanks = async () => {
     tableRow.appendChild(bankAddress);
 
     fetch(`/banks/${id}/donors`)
-      .then(response => response.json())
-      .then(donors => {
+      .then((response) => response.json())
+      .then((donors) => {
         const bankDonorsNumber = document.createElement('td');
         bankDonorsNumber.textContent = Object.values(donors)[0].count;
         tableRow.appendChild(bankDonorsNumber);
@@ -28,45 +36,72 @@ const getBanks = async () => {
   });
 };
 
+const removeDonor = (donorId) => {
+  const options = {
+    method: 'DELETE',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+  };
+  fetch(`/donor/${donorId}`, options)
+    .then(() => {
+      window.location.href = '/';
+    })
+    .catch(() => {
+      window.location.href = '/error/404';
+    });
+};
+
 const getDonors = async () => {
   const donorsData = fetch('/donors');
   const response = await donorsData;
   const data = await response.json();
-  data.forEach(donor => {
-    const donorCard = document.createElement('div');
-    donorsSection.appendChild(donorCard);
-    donorCard.classList.add('donor-blood');
+  data.forEach(
+    ({
+      blood_type: bloodType,
+      first_name: firstName,
+      last_name: lastName,
+      bank_name: bankName,
+      id,
+    }) => {
+      const donorCard = document.createElement('div');
+      donorsSection.appendChild(donorCard);
+      donorCard.classList.add('donor-blood');
 
-    const bloodTypeContainer = document.createElement('div');
-    bloodTypeContainer.classList.add('donor-blood-type');
-    donorCard.appendChild(bloodTypeContainer);
+      const bloodTypeContainer = document.createElement('div');
+      bloodTypeContainer.classList.add('donor-blood-type');
+      donorCard.appendChild(bloodTypeContainer);
 
-    const donorBloodType = document.createElement('span');
-    donorBloodType.textContent = donor.blood_type;
-    bloodTypeContainer.appendChild(donorBloodType);
+      const donorBloodType = document.createElement('span');
+      donorBloodType.textContent = bloodType;
+      bloodTypeContainer.appendChild(donorBloodType);
 
-    const donorName = document.createElement('p');
-    donorName.textContent = `${donor.first_name} ${donor.last_name}`;
-    donorName.classList.add('donor-name');
-    donorCard.appendChild(donorName);
+      const donorName = document.createElement('p');
+      donorName.textContent = `${firstName} ${lastName}`;
+      donorName.classList.add('donor-name');
+      donorCard.appendChild(donorName);
 
-    const deleteForm = document.createElement('form');
-    deleteForm.setAttribute('action', `/donors/${donor.id}`);
-    deleteForm.setAttribute('method', 'POST');
+      const bankNameElement = document.createElement('p');
+      bankNameElement.textContent = `${bankName}`;
+      bankNameElement.classList.add('donor-bank-name');
+      donorCard.appendChild(bankNameElement);
 
-    donorCard.appendChild(deleteForm);
+      const deleteForm = document.createElement('div');
 
-    const hiddenInput = document.createElement('input');
-    hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('name', '_method');
-    hiddenInput.setAttribute('value', 'DELETE');
-    deleteForm.appendChild(hiddenInput);
+      donorCard.appendChild(deleteForm);
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete-btn');
-    deleteBtn.textContent = 'Delete';
-    deleteForm.appendChild(deleteBtn);
-  });
+      const deleteBtn = document.createElement('button');
+      deleteBtn.classList.add('delete-btn');
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.addEventListener('click', () => removeDonor(id));
+      deleteForm.appendChild(deleteBtn);
+    },
+  );
 };
 
 function validateForm(e) {
@@ -79,18 +114,22 @@ function validateForm(e) {
   const lastName = document.getElementsByName('lastName')[0].value.trim();
   const address = document.getElementsByName('address')[0].value.trim();
 
-  if (!email || !bloodType || !bank || !age || !firstName || !lastName || !address) {
+  if (
+    !email ||
+    !bloodType ||
+    !bank ||
+    !age ||
+    !firstName ||
+    !lastName ||
+    !address
+  ) {
     alert('Please fill all fields');
-    return;
   } else if (!email.includes('@')) {
     alert('Please enter a valid email');
-    return;
   } else if (age < 18) {
     alert('You must be 18 or older to donate blood');
-    return;
   } else if (!bloodType || !bank) {
     alert('Please select the blood type and bank');
-    return;
   } else {
     form.submit();
   }
