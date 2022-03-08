@@ -1,7 +1,7 @@
 const { join } = require('path');
 const express = require('express');
 const compression = require('compression');
-const { bankRouter } = require('./routes');
+const { bankRouter, donorRouter } = require('./routes');
 // const router = require('./routes/index');
 
 const app = express();
@@ -15,5 +15,6 @@ app.use(express.json());
 app.set('port', process.env.PORT || 3000);
 
 app.use(bankRouter);
+app.use(donorRouter);
 
 module.exports = app;

@@ -1,3 +1,4 @@
-const {getBanks} = require('./bankController');
+const { getBanks } = require('./bankController');
+const { getDonors } = require('./donorController');
 
-module.exports = {getBanks};
+module.exports = { getBanks, getDonors };

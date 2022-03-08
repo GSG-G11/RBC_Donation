@@ -1,7 +1,8 @@
-const {getBanks} = require('../controllers');
+const express = require('express');
+const { getBanks } = require('../controllers');
 
-const bankRouter = require('express').Router();
+const bankRouter = express.Router();
 
 bankRouter.get('/banks', getBanks);
 
-module.exports = {bankRouter};
+module.exports = { bankRouter };
