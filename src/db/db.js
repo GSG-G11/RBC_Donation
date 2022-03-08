@@ -1,6 +1,6 @@
-const {Pool} = require('pg');
-const {DB_URL} = require('./dbconfig');
+const { Pool } = require('pg');
+const URL = require('./dbconfig');
 
-const pool = new Pool({connectionString: DB_URL, ssl: false});
+const pool = new Pool({ connectionString: URL, ssl: false });
 
-module.exports = {pool};
+module.exports = { pool };

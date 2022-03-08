@@ -1,13 +1,17 @@
+const { join } = require('path');
 const express = require('express');
-const app = express();
-const {pool} = require('../src/db/db');
+const compression = require('compression');
+// const router = require('./routes/index');
 
-//Test connection to database
-pool.connect(err => {
-  if (err) {
-    return console.error('Error connecting to DB', err);
-  }
-  console.log('connected to DB');
-});
+const app = express();
+
+app.use(compression());
+app.use(express.static(join(__dirname, '..', 'public')));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// app.use(router);
+
+app.set('port', process.env.PORT || 3000);
 
 module.exports = app;

@@ -4,15 +4,16 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "start": "NODE_ENV=production node src/server.js",
+    "dev": "NODE_ENV=development nodemon src/server.js",
+    "test": "NODE_ENV=test jest",
     "build": "node src/db/build/build.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "env2": "^2.2.2",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^8.5.0",
