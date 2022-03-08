@@ -36,26 +36,7 @@ const getBanks = async () => {
   });
 };
 
-const removeDonor = (donorId) => {
-  const options = {
-    method: 'DELETE',
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-  };
-  fetch(`/donor/${donorId}`, options)
-    .then(() => {
-      window.location.href = '/';
-    })
-    .catch(() => {
-      window.location.href = '/error/404';
-    });
-};
+// const newRender
 
 const getDonors = async () => {
   const donorsData = fetch('/donors');
@@ -98,6 +79,33 @@ const getDonors = async () => {
       const deleteBtn = document.createElement('button');
       deleteBtn.classList.add('delete-btn');
       deleteBtn.textContent = 'Delete';
+
+      const removeDonor = async (donorId) => {
+        const options = {
+          method: 'DELETE',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer',
+        };
+
+        fetch(`/donor/${donorId}`, options)
+          .then((res) => res.json())
+          .then(() => {
+            donorsSection.innerHTML = '';
+            tableBody.innerHTML = '';
+            getDonors();
+            getBanks();
+          })
+          .catch(() => {
+            window.location.href = '/error/404';
+          });
+      };
+
       deleteBtn.addEventListener('click', () => removeDonor(id));
       deleteForm.appendChild(deleteBtn);
     },
@@ -137,5 +145,7 @@ function validateForm(e) {
 
 form.addEventListener('submit', validateForm);
 
-getBanks();
-getDonors();
+window.onload = () => {
+  getBanks();
+  getDonors();
+};

@@ -107,7 +107,7 @@ describe('Test the banks of blood path in server', () => {
   test('Delete Route /banks/:id/donors | status 302 | content-type JSON', (done) => {
     request(app)
       .delete(`/donor/${ID}`)
-      .expect(302)
+      .expect(200)
       .end((err) => {
         if (err) return done(err);
         return done();
