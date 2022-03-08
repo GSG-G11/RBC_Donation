@@ -14,7 +14,7 @@ const addDonor = async ({ body }, res) => {
   try {
     const { firstName, lastName, address, age, email, bloodType, bankId } =
       body;
-    const { rows } = await connection.query(insertDonor, [
+    await connection.query(insertDonor, [
       firstName,
       lastName,
       address,
@@ -23,7 +23,7 @@ const addDonor = async ({ body }, res) => {
       bloodType,
       bankId,
     ]);
-    res.send(rows);
+    res.redirect('/');
   } catch (err) {
     res.status(500).send(err);
   }
