@@ -4,7 +4,7 @@ const request = require('supertest');
 const app = require('../app');
 
 const ID = 1;
-const inputForm = {
+const ValidInputForm = {
   firstName: 'Ahmed new',
   lastName: 'Mohamed new',
   address: 'Tel el hawa new',
@@ -12,6 +12,42 @@ const inputForm = {
   email: 'ahmednew@gmail.com',
   bloodType: '+AB',
   bankId: 2,
+};
+const emptyInputForm = {
+  firstName: '',
+  lastName: '',
+  address: '',
+  age: '',
+  email: '',
+  bloodType: '',
+  bankId: '',
+};
+const invalidAgeInputForm = {
+  firstName: 'abd',
+  lastName: 'ali',
+  address: 'ps - gsg ',
+  age: 15,
+  email: 'abd_ali@gsg.com',
+  bloodType: '+O',
+  bankId: 1,
+};
+const invalidEmail = {
+  firstName: 'abd hhh',
+  lastName: 'ali hhh',
+  address: 'ps - gsg - 2',
+  age: 20,
+  email: 'hi iam email',
+  bloodType: '+AB',
+  bankId: 3,
+};
+const hasBloodTypeAndBank = {
+  firstName: 'ali',
+  lastName: 'moh',
+  address: 'palestine - gsg - 2',
+  age: 23,
+  email: 'ali_2021@gsg.com',
+  bloodType: '',
+  bankId: 1,
 };
 
 describe('Test the root path', () => {
@@ -50,9 +86,6 @@ describe('Test the unknown path in server', () => {
   });
 });
 
-// /banks
-// /banks/:id/donors
-
 describe('Test the banks of blood path in server', () => {
   test('GET Route /banks | status 200 | content-type JSON', (done) => {
     request(app)
@@ -77,10 +110,7 @@ describe('Test the banks of blood path in server', () => {
   });
 });
 
-// /donors
-// /donor
-// /donor/:id
-describe('Test the banks of blood path in server', () => {
+describe('Test the donors path in server', () => {
   test('GET Route /donors | status 200 | content-type JSON', (done) => {
     request(app)
       .get('/donors')
@@ -97,7 +127,7 @@ describe('Test the banks of blood path in server', () => {
       .post('/donor')
       .expect(302)
       .expect('content-type', 'text/plain; charset=utf-8')
-      .send(inputForm)
+      .send(ValidInputForm)
       .end((err) => {
         if (err) return done(err);
         return done();
@@ -110,6 +140,62 @@ describe('Test the banks of blood path in server', () => {
       .expect(200)
       .end((err) => {
         if (err) return done(err);
+        return done();
+      });
+  });
+});
+
+describe('Test the donors path in server, Test Failed Cases', () => {
+  test('Test should fail case (empty Input Form), and then return status 400', (done) => {
+    request(app)
+      .post('/donor')
+      .expect(400)
+      .expect('content-type', 'application/json; charset=utf-8')
+      .send(emptyInputForm)
+      .end((err, { text }) => {
+        if (err) return done(err);
+        const { message } = JSON.parse(text);
+        expect(message).toBe('Please fill all fields');
+        return done();
+      });
+  });
+  test('Test should fail case (invalid age Input Form), and then return status 400', (done) => {
+    request(app)
+      .post('/donor')
+      .expect(400)
+      .expect('content-type', 'application/json; charset=utf-8')
+      .send(invalidAgeInputForm)
+      .end((err, { text }) => {
+        if (err) return done(err);
+        const { message } = JSON.parse(text);
+        expect(message).toBe('You must be 18 or older to donate blood');
+        return done();
+      });
+  });
+  test('Test should fail case (invalid age Input Form), and then return status 400', (done) => {
+    request(app)
+      .post('/donor')
+      .expect(400)
+      .expect('content-type', 'application/json; charset=utf-8')
+      .send(invalidEmail)
+      .end((err, { text }) => {
+        if (err) return done(err);
+        const { message } = JSON.parse(text);
+        expect(message).toBe('Please enter a valid email');
+        return done();
+      });
+  });
+
+  test('Test should fail case (invalid age Input Form), and then return status 400', (done) => {
+    request(app)
+      .post('/donor')
+      .expect(400)
+      .expect('content-type', 'application/json; charset=utf-8')
+      .send(hasBloodTypeAndBank)
+      .end((err, { text }) => {
+        if (err) return done(err);
+        const { message } = JSON.parse(text);
+        expect(message).toBe('Please select the blood type and bank');
         return done();
       });
   });

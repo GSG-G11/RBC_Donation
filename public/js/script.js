@@ -36,7 +36,6 @@ const getBanks = async () => {
   });
 };
 
-// const newRender
 
 const getDonors = async () => {
   const donorsData = fetch('/donors');
