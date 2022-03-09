@@ -4,10 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
     "dev": "cross-env NODE_ENV=development nodemon src/server.js",
     "test": "cross-env NODE_ENV=test jest",
-    "build": "cross-env NODE_ENV=production node src/db/build/build.js",
+    "build": "NODE_ENV=production node src/db/build/build.js",
     "build:dev": "cross-env NODE_ENV=development node src/db/build/build.js"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "express": "^4.17.3",
+    "helmet": "^5.0.2",
     "jest": "^27.5.1",
     "pg": "^8.7.3",
     "prettier": "^2.5.1"
