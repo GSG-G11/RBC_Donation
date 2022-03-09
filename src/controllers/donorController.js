@@ -33,13 +33,7 @@ const deleteDonor = async ({ params }, res) => {
   try {
     const { id } = params;
     const { rowCount } = await connection.query(removeDonor, [id]);
-    if (rowCount === 1) {
-      const { rows } = await connection.query(getAllDonors);
-      res.status(200).json(rows);
-    } else {
-      res.status(400).json({ error: true });
-    }
-    // res.redirect('/');
+    res.status(200).json(rowCount);
   } catch (err) {
     res.status(500).send(err);
   }
