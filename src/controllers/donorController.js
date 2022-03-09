@@ -14,18 +14,37 @@ const addDonor = async ({ body }, res) => {
   try {
     const { firstName, lastName, address, age, email, bloodType, bankId } =
       body;
-    await connection.query(insertDonor, [
-      firstName,
-      lastName,
-      address,
-      age,
-      email,
-      bloodType,
-      bankId,
-    ]);
-    res.redirect('/');
+    const isBloodTypeAndBank = !bloodType || !bankId;
+    if (
+      !firstName ||
+      !lastName ||
+      !address ||
+      !age ||
+      !email ||
+      !bloodType ||
+      !bankId
+    ) {
+      res.status(401).json('Please fill all fields');
+    } else if (!email.includes('@')) {
+      res.status(401).json('Please enter a valid email');
+    } else if (age < 18) {
+      res.status(401).json('You must be 18 or older to donate blood');
+    } else if (isBloodTypeAndBank) {
+      res.status(401).json('Please select the blood type and bank');
+    } else {
+      await connection.query(insertDonor, [
+        firstName.trim(),
+        lastName.trim(),
+        address.trim(),
+        age.trim(),
+        email.trim(),
+        bloodType.trim(),
+        bankId.trim(),
+      ]);
+      res.redirect('/');
+    }
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json(err);
   }
 };
 
