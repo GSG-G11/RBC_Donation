@@ -14,33 +14,37 @@ const addDonor = async ({ body }, res) => {
   try {
     const { firstName, lastName, address, age, email, bloodType, bankId } =
       body;
-    const isBloodTypeAndBank = !bloodType || !bankId;
+    const hasBloodTypeAndBank = !bloodType || !bankId;
     if (
       !firstName ||
       !lastName ||
       !address ||
       !age ||
       !email ||
-      !bloodType ||
-      !bankId
+      (!bloodType && !bankId)
     ) {
-      res.status(401).json('Please fill all fields');
+      res.status(400).json({ message: 'Please fill all fields' });
     } else if (!email.includes('@')) {
-      res.status(401).json('Please enter a valid email');
+      res.status(400).json({ message: 'Please enter a valid email' });
     } else if (age < 18) {
-      res.status(401).json('You must be 18 or older to donate blood');
-    } else if (isBloodTypeAndBank) {
-      res.status(401).json('Please select the blood type and bank');
+      res
+        .status(400)
+        .json({ message: 'You must be 18 or older to donate blood' });
+    } else if (hasBloodTypeAndBank) {
+      res
+        .status(400)
+        .json({ message: 'Please select the blood type and bank' });
     } else {
       await connection.query(insertDonor, [
         firstName.trim(),
         lastName.trim(),
         address.trim(),
-        age.trim(),
+        age,
         email.trim(),
         bloodType.trim(),
-        bankId.trim(),
+        bankId,
       ]);
+
       res.redirect('/');
     }
   } catch (err) {
