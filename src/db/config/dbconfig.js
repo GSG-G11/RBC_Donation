@@ -1,12 +1,12 @@
 require('env2')('./.env');
 
 // eslint-disable-next-line object-curly-newline
-const { NODE_ENV, DB_URL, DEV_DB_URL, TEST_DB_URL } = process.env;
+const { NODE_ENV, DATABASE_URL, DEV_DB_URL, TEST_DB_URL } = process.env;
 let URL;
 
 switch (NODE_ENV) {
   case 'production':
-    URL = DB_URL;
+    URL = DATABASE_URL;
     break;
   case 'development':
     URL = DEV_DB_URL;
