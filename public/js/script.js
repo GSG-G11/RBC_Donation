@@ -16,14 +16,17 @@ const getBanks = async () => {
     bankSelectElement.appendChild(optionBank);
 
     const tableRow = document.createElement('tr');
+    tableRow.className = 'table-rows';
     tableBody.appendChild(tableRow);
 
     const bankName = document.createElement('td');
     bankName.textContent = bank.name;
+    bankName.className = 'items';
     tableRow.appendChild(bankName);
 
     const bankAddress = document.createElement('td');
     bankAddress.textContent = bank.address;
+    bankAddress.className = 'items';
     tableRow.appendChild(bankAddress);
 
     fetch(`/banks/${id}/donors`)
@@ -31,11 +34,11 @@ const getBanks = async () => {
       .then((donors) => {
         const bankDonorsNumber = document.createElement('td');
         bankDonorsNumber.textContent = Object.values(donors)[0].count;
+        bankDonorsNumber.className = 'items';
         tableRow.appendChild(bankDonorsNumber);
       });
   });
 };
-
 
 const getDonors = async () => {
   const donorsData = fetch('/donors');
@@ -112,7 +115,6 @@ const getDonors = async () => {
 };
 
 function validateForm(e) {
-  e.preventDefault();
   const email = document.getElementsByName('email')[0].value.trim();
   const bloodType = document.getElementsByName('bloodType')[0].value.trim();
   const bank = document.getElementsByName('bankId')[0].value.trim();
@@ -121,22 +123,34 @@ function validateForm(e) {
   const lastName = document.getElementsByName('lastName')[0].value.trim();
   const address = document.getElementsByName('address')[0].value.trim();
 
-  if (
-    !email ||
-    !bloodType ||
-    !bank ||
-    !age ||
-    !firstName ||
-    !lastName ||
-    !address
-  ) {
-    alert('Please fill all fields');
-  } else if (!email.includes('@')) {
-    alert('Please enter a valid email');
-  } else if (age < 18) {
-    alert('You must be 18 or older to donate blood');
-  } else if (!bloodType || !bank) {
-    alert('Please select the blood type and bank');
+  const errorMessages = [];
+
+  if (!email || !bank || !age || !firstName || !lastName || !address) {
+    errorMessages.push('All fields are required');
+  }
+  if (!email.includes('@')) {
+    errorMessages.push('Please enter a valid email');
+  }
+  if (age < 18) {
+    errorMessages.push('You must be 18 or older to donate blood');
+  }
+  if (!bloodType) {
+    errorMessages.push('Please select a blood type');
+  }
+
+  if (errorMessages.length > 0) {
+    e.preventDefault();
+
+    document.querySelector('ul') ? document.querySelector('ul').remove() : null;
+    const messagesList = document.createElement('ul');
+    form.appendChild(messagesList);
+    errorMessages.forEach((message) => {
+      const messageItem = document.createElement('li');
+
+      messageItem.classList.add('error-message');
+      messageItem.textContent = message;
+      messagesList.appendChild(messageItem);
+    });
   } else {
     form.submit();
   }
