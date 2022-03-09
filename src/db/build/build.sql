@@ -15,7 +15,7 @@ CREATE TABLE donors (
     last_name VARCHAR(50) NOT NULL,
     address TEXT NOT NULL,
     age INT NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL ,
     blood_type VARCHAR(10) NOT NULL,
     bank_id INT NOT NULL REFERENCES banks(id)
 );
