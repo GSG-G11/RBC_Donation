@@ -8,9 +8,6 @@
 html {
   overflow-x: hidden;
 }
-body {
-  overflow-x: hidden;
-}
 
 header {
   display: flex;
@@ -250,4 +247,58 @@ table.bank-table {
 
 body {
   padding-bottom: 3.2rem;
+  overflow-x: hidden;
+}
+
+/* Error page */
+.error__page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ff5678;
+  text-align: center;
+}
+.error__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.error__page .err {
+  color: #ffffff;
+  font-size: 11rem;
+}
+
+.error__page .far {
+  font-size: 8.5rem;
+  color: #ffffff;
+}
+
+.error__page .err2 {
+  color: #ffffff;
+  font-size: 11rem;
+}
+
+.error__page .msg {
+  text-align: center;
+  font-size: 1.6rem;
+  color: white;
+}
+.error__page .msg p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.error__page a {
+  text-decoration: none;
+  color: #fffb00;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.error__page a:hover {
+  text-decoration: underline;
 }
