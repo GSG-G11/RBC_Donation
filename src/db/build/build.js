@@ -7,7 +7,7 @@ const connection = require('../config/db');
 const sqlBuildQuery = fs.readFileSync('src/db/build/build.sql', 'utf8');
 
 // Execute the Build.sql file
-connection.query(sqlBuildQuery, (err, res) => {
+connection.query(sqlBuildQuery, (err) => {
   if (err) {
     return console.error('Error making query', err);
   }

@@ -3,10 +3,10 @@ const { getAllDonors, insertDonor, removeDonor } = require('../db/queries');
 
 const getDonors = async (req, res) => {
   try {
-    const donors = await connection.query(getAllDonors);
-    res.send(donors.rows);
+    const { rows } = await connection.query(getAllDonors);
+    res.status(200).json(rows);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).json(err);
   }
 };
 
@@ -32,8 +32,14 @@ const addDonor = async ({ body }, res) => {
 const deleteDonor = async ({ params }, res) => {
   try {
     const { id } = params;
-    await connection.query(removeDonor, [id]);
-    res.redirect('/');
+    const { rowCount } = await connection.query(removeDonor, [id]);
+    if (rowCount === 1) {
+      const { rows } = await connection.query(getAllDonors);
+      res.status(200).json(rows);
+    } else {
+      res.status(400).json({ error: true });
+    }
+    // res.redirect('/');
   } catch (err) {
     res.status(500).send(err);
   }

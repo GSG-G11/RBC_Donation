@@ -3,8 +3,8 @@ const { getAllBanks, getBankDonorsNumber } = require('../db/queries');
 
 const getBanks = async (req, res) => {
   try {
-    const banks = await connection.query(getAllBanks);
-    res.send(banks.rows);
+    const { rows } = await connection.query(getAllBanks);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -13,8 +13,8 @@ const getBanks = async (req, res) => {
 const getBankDonors = async ({ params }, res) => {
   try {
     const { id } = params;
-    const donors = await connection.query(getBankDonorsNumber, [id]);
-    res.send(donors.rows);
+    const { rows } = await connection.query(getBankDonorsNumber, [id]);
+    res.status(200).json(rows);
   } catch (err) {
     res.status(500).send(err);
   }

@@ -1,5 +1,6 @@
 const { getBanks, getBankDonors } = require('./bankController');
 const { getDonors, addDonor, deleteDonor } = require('./donorController');
+const { getNotFoundError, getServerError } = require('./errorController');
 
 module.exports = {
   getBanks,
@@ -7,4 +8,6 @@ module.exports = {
   getDonors,
   addDonor,
   deleteDonor,
+  getNotFoundError,
+  getServerError,
 };
