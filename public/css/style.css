@@ -126,6 +126,7 @@ section {
   outline: none;
   border: none;
   border-bottom: #ccc 1px solid;
+  resize: none;
 }
 
 .row select {
